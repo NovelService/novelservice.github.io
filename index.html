@@ -1,8 +1,87 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<h1>Novel Service</h1>
+    <h1>Novel Service</h1>
+
+    <h2>Start download</h2>
+    <label for="url">url</label>
+    <input type="url" id="url" name="url" size="100"><br><br>
+    <input id="post" type="submit" value="Submit">
+
+    <h2>Get result</h2>
+    <input id="get" type="submit" value="Submit">
+    <div>
+        <label for="status">status</label>
+        <p id="status" name="status"></p>
+        <label for="url">url</label>
+        <p id="urlresult" name="url"></p>
+        
+    </div>
+
+
+    <script>
+        function createUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8)
+                return v.toString(16)
+            })
+        }
+
+        var id = createUUID()
+        console.log("id: " + id)
+
+        var post = document.getElementById("post")
+        post.addEventListener("click", () => {
+            var url = document.getElementById("url").value.trim()
+
+            var data = {
+                id: id,
+                urls: [
+                    url
+                ],
+                options: {
+                    output: id + ".epub"
+                }
+            }
+            console.log("post")
+            fetch("https://my6pmey7adsjxo46zbqxk3nw7e0nvazt.lambda-url.eu-central-1.on.aws/", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(res => {
+                console.log("post request complete! response:", res)
+            }).catch(e => console.log(e))
+        })
+
+        var get = document.getElementById("get")
+        var statusP = document.getElementById("status")   
+        var urlP = document.getElementById("urlresult")   
+
+        get.addEventListener("click", () => {
+            var data = {
+                id: id,
+            }
+            console.log("get")
+            fetch("https://35647flwmbq46rhlty6ulnbnhq0jyxni.lambda-url.eu-central-1.on.aws/", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(res => {
+                res.json().then(json =>  {
+                    console.log(json)
+                    statusP.innerHTML = json.status
+                    urlP.innerHTML = json.url
+
+                })
+                console.log("Get request complete! response:", res)
+            }).catch(e => console.log(e))
+        })
+
+
+    </script>
 
 </body>
+
 </html>
