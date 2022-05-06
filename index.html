@@ -6,7 +6,8 @@
     <h1>Novel Service</h1>
 
     <p>Download any webpage as an ebook. It uses the reader mode from firefox for that.</p>
-    <p>Enter any single url into the input field, send the request and then poll the result until the status is marked as "done" and then download the file from the provided url</p>
+    <p>Enter any single url into the input field, send the request and then poll the result until the status is marked
+        as "done" and then download the file from the provided url</p>
     <p>source: https://github.com/NovelService/novelservice.github.io</p>
 
     <h2>Start download</h2>
@@ -21,7 +22,6 @@
         <p id="status" name="status"></p>
         <label for="url">url</label>
         <p id="urlresult" name="url"></p>
-        
     </div>
 
 
@@ -38,6 +38,9 @@
 
         var post = document.getElementById("post")
         post.addEventListener("click", () => {
+            post.disabled = true;
+            post.value = "loading"
+
             var url = document.getElementById("url").value.trim()
 
             var data = {
@@ -55,15 +58,26 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             }).then(res => {
+                post.disabled = false;
+                post.value = "submit"
+
                 console.log("post request complete! response:", res)
-            }).catch(e => console.log(e))
+            }).catch(e => {
+                post.disabled = false;
+                post.value = "submit"
+
+                console.log(e)
+            })
         })
 
         var get = document.getElementById("get")
-        var statusP = document.getElementById("status")   
-        var urlP = document.getElementById("urlresult")   
+        var statusP = document.getElementById("status")
+        var urlP = document.getElementById("urlresult")
 
         get.addEventListener("click", () => {
+            get.disabled = true;
+            get.value = "loading"
+
             var data = {
                 id: id,
             }
@@ -73,14 +87,24 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             }).then(res => {
-                res.json().then(json =>  {
+                get.disabled = false;
+                get.value = "submit"
+
+
+                res.json().then(json => {
                     console.log(json)
                     statusP.innerHTML = json.status
                     urlP.innerHTML = json.url
 
                 })
                 console.log("Get request complete! response:", res)
-            }).catch(e => console.log(e))
+            }).catch(e => {
+                get.disabled = false;
+                get.value = "submit"
+
+
+                console.log(e)
+            })
         })
 
 
