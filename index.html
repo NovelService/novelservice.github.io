@@ -6,12 +6,13 @@
     <h1>Novel Service</h1>
 
     <p>Download any webpage as an ebook. It uses the reader mode from firefox for that.</p>
-    <p>Enter any single url into the input field, send the request and then poll the result until the status is marked
-        as "done" and then download the file from the provided url</p>
-    <p>source: https://github.com/NovelService/novelservice.github.io</p>
+    <p>Enter any amount of urls into the input field. Each url needs to be separated with ,</p>
+    <p>So for example:url1,url2,url3</p>
+    <p>Then send the request and then poll the result until the status is marked as "done" and then download the file from the provided url</p>
+    <p>source: <a href="https://github.com/NovelService/novelservice.github.io" target="_blank">github</a> </p>
 
     <h2>Start download</h2>
-    <label for="url">url</label>
+    <label for="url">urls</label>
     <input type="url" id="url" name="url" size="100"><br><br>
     <input id="post" type="submit" value="Submit">
 
@@ -38,20 +39,23 @@
 
         var post = document.getElementById("post")
         post.addEventListener("click", () => {
+<<<<<<< HEAD
             post.disabled = true;
             post.value = "loading"
 
             var url = document.getElementById("url").value.trim()
+=======
+            var urls = document.getElementById("url").value.trim().split(",")
+>>>>>>> 043e387 (Allow sending multple urls at once)
 
             var data = {
                 id: id,
-                urls: [
-                    url
-                ],
+                urls: urls,
                 options: {
                     output: id + ".epub"
                 }
             }
+            console.log(data)
             console.log("post")
             fetch("https://my6pmey7adsjxo46zbqxk3nw7e0nvazt.lambda-url.eu-central-1.on.aws/", {
                 method: "POST",
