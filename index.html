@@ -8,7 +8,8 @@
     <p>Download any webpage as an ebook. It uses the reader mode from firefox for that.</p>
     <p>Enter any amount of urls into the input field. Each url needs to be separated with ,</p>
     <p>So for example:url1,url2,url3</p>
-    <p>Then send the request and then poll the result until the status is marked as "done" and then download the file from the provided url</p>
+    <p>Then send the request and then poll the result until the status is marked as "done" and then download the file
+        from the provided url</p>
     <p>source: <a href="https://github.com/NovelService/novelservice.github.io" target="_blank">github</a> </p>
 
     <h2>Your id</h2>
@@ -28,7 +29,7 @@
         <label for="status">status</label>
         <p id="status" name="status"></p>
         <label for="url">url</label>
-        <p id="urlresult" name="url"></p>
+        <a id="urlresult" name="url"></p>
     </div>
 
 
@@ -46,14 +47,10 @@
 
         var post = document.getElementById("post")
         post.addEventListener("click", () => {
-<<<<<<< HEAD
             post.disabled = true;
             post.value = "loading"
 
-            var url = document.getElementById("url").value.trim()
-=======
             var urls = document.getElementById("url").value.trim().split(",")
->>>>>>> 043e387 (Allow sending multple urls at once)
 
             var data = {
                 id: id,
@@ -83,7 +80,7 @@
 
         var get = document.getElementById("get")
         var statusP = document.getElementById("status")
-        var urlP = document.getElementById("urlresult")
+        var urlA = document.getElementById("urlresult")
 
         get.addEventListener("click", () => {
             get.disabled = true;
@@ -102,11 +99,13 @@
                 get.disabled = false;
                 get.value = "submit"
 
-
                 res.json().then(json => {
                     console.log(json)
                     statusP.innerHTML = json.status
-                    urlP.innerHTML = json.url
+                    if (json.url) {
+                        urlA.href = json.url
+                        urlA.innerText = json.url
+                    }
 
                 })
                 console.log("Get request complete! response:", res)
