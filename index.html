@@ -11,14 +11,20 @@
     <p>Then send the request and then poll the result until the status is marked as "done" and then download the file from the provided url</p>
     <p>source: <a href="https://github.com/NovelService/novelservice.github.io" target="_blank">github</a> </p>
 
+    <h2>Your id</h2>
+    <p id="id"></p>
+
     <h2>Start download</h2>
     <label for="url">urls</label>
-    <input type="url" id="url" name="url" size="100"><br><br>
+    <input type="text" id="url" name="url" size="100"><br><br>
     <input id="post" type="submit" value="Submit">
 
     <h2>Get result</h2>
+    <label for="getId">Id</label>
+    <input type="text" id="getId" name="getId" size="100"><br><br>
     <input id="get" type="submit" value="Submit">
     <div>
+
         <label for="status">status</label>
         <p id="status" name="status"></p>
         <label for="url">url</label>
@@ -35,7 +41,8 @@
         }
 
         var id = createUUID()
-        console.log("id: " + id)
+        document.getElementById("id").innerText = id
+        document.getElementById("getId").value = id
 
         var post = document.getElementById("post")
         post.addEventListener("click", () => {
@@ -55,8 +62,8 @@
                     output: id + ".epub"
                 }
             }
-            console.log(data)
             console.log("post")
+            console.log(data)
             fetch("https://my6pmey7adsjxo46zbqxk3nw7e0nvazt.lambda-url.eu-central-1.on.aws/", {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -83,9 +90,10 @@
             get.value = "loading"
 
             var data = {
-                id: id,
+                id: document.getElementById("getId").value,
             }
             console.log("get")
+            console.log(data)
             fetch("https://35647flwmbq46rhlty6ulnbnhq0jyxni.lambda-url.eu-central-1.on.aws/", {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
