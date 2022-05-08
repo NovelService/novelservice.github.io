@@ -1,4 +1,3 @@
-
 const postUrl = 'https://my6pmey7adsjxo46zbqxk3nw7e0nvazt.lambda-url.eu-central-1.on.aws/'
 const getUrl = 'https://35647flwmbq46rhlty6ulnbnhq0jyxni.lambda-url.eu-central-1.on.aws/'
 

@@ -1,0 +1,47 @@
+.form-control:-ms-input-placeholder {
+    color: #6c757d;
+    opacity: 1;
+}
+
+.form-floating>.form-control:-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-floating>.form-control:not(:-ms-input-placeholder) {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+}
+
+.form-floating>.form-control:not(:-ms-input-placeholder)~label {
+    opacity: 0.65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+.form-floating>.form-control:not(:-ms-input-placeholder)~label {
+    opacity: 0.65;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+html {
+    scroll-padding-top: 3.5rem;
+}
+
+header {
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+}
+
+section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.svg-large {
+    width: 50px;
+    height: 50px;
+}
+
+.icon-link {
+    color: initial !important;
+    text-decoration: none;
+}
