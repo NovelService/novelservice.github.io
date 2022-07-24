@@ -5,6 +5,7 @@ const postForm = document.getElementById('postForm')
 const postButton = document.getElementById('postSubmit')
 const postButtonLoading = document.getElementById('postSubmitLoading')
 const urlsTextArea = document.getElementById('urls')
+const fileTypeSelect = document.getElementById('fileType')
 const idInput = document.getElementById('id')
 const getForm = document.getElementById('getForm')
 const getButton = document.getElementById('getSubmit')
@@ -25,11 +26,13 @@ function addPostFormListener() {
         postButtonLoading.classList.remove('d-none')
 
         const urls = urlsTextArea.value.trim().split('\n')
+        const fileType = fileTypeSelect.value
         const id = createUUID()
         const data = {
             id: id,
             urls: urls,
             options: {
+                fileType: fileType,
                 output: id + '.epub'
             }
         }

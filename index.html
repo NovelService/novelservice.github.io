@@ -46,6 +46,13 @@
                                 placeholder="https://novelservice.github.io/&#10;https://novelservice.github.io/"
                                 required></textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="fileType" class="form-label col-form-label-lg">File type</label>
+                            <select id="fileType" class="form-select">
+                                <option selected value="epub">epub</option>
+                                <option value="pdf">pdf</option>
+                              </select>
+                        </div>
                         <button id="postSubmit" type="submit" class="btn btn-primary mt-sm-3">Start</button>
                         <button id="postSubmitLoading" class="btn btn-primary mt-sm-3 d-none" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
